@@ -38,6 +38,19 @@ class Database:
             self.connection.close()
         print('Conexão com o banco de dados encerrada com sucesso!')
 
+    def executar(self, sql, params=None):
+        """Executa uma instrução no banco de dados."""
+        if self.connection is None and self.cursor is None:
+            print('Conexão ao banco de dados não estabelecida!')
+            return None
+        try:
+            self.cursor.execute(sql,params)
+            self.connection.commit()
+            return self.cursor 
+        except Error as e:
+            print(f'Erro de execução: {e}')
+            return None
+
     def consultar(self, sql, params=None):
         """Executa uma instrução no banco de dados."""
         if self.connection is None and self.cursor is None:
@@ -46,7 +59,7 @@ class Database:
         
         try:
             self.cursor.execute(sql,params)
-           #self.connection.commit()
+           #self.connection.commit() -> select não usa commit
             return self.cursor.fetchall() 
         except Error as e:
             print(f'Erro de execução: {e}')
