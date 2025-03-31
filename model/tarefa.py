@@ -1,7 +1,7 @@
-from database import Database
+from model.database import Database
 
 class Tarefa:
-    def __init__(self, id, titulo, data_conclusao):
+    def __init__(self, id=None, titulo=None, data_conclusao=None):
         self.id = id
         self.titulo = titulo
         self.data_conclusao = data_conclusao

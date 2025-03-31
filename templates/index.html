@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="POST">
+        <input type="text" name="titulo" placeholder="Título da tarefa" required>
+        <input type="date" name="data_conclusão">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <ul>
+        {$ for tarefa in tarefas $}
+            <li>
+                {{tarefa.titulo}} - {{ tarefa.data_conclusao}}
+                <a href="{{ url_for('delete', id=tarefa.id) }}">Apagar</a>
+            </li>
+            {% endfor %}
+    </ul>
+    {% endblock %}
+
+    <button type="submit">Apagar Tarefas</button>
